@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sơ đồ tư duy 5W1H2C5M - Kế hoạch đạt IELTS 7.0</title>
+    <!-- Tailwind CSS for modern responsive styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font for premium look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        canvas {
+            cursor: grab;
+        }
+        canvas:active {
+            cursor: grabbing;
+        }
+        /* Custom scrollbar for sidebar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.05);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0,0,0,0.2);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 h-screen overflow-hidden flex flex-col">
+
+    <!-- Top Navigation Bar -->
+    <header class="bg-white border-b border-slate-200 px-6 py-4 flex flex-wrap items-center justify-between gap-4 shrink-0 shadow-sm z-10">
+        <div class="flex items-center gap-3">
+            <div class="p-2 bg-indigo-600 text-white rounded-lg shadow-md shadow-indigo-100">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+            </div>
+            <div>
+                <h1 class="text-xl font-bold text-slate-900 tracking-tight">Kế hoạch IELTS 7.0 (Năm 2)</h1>
+                <p class="text-xs text-slate-500 font-medium">Bản đồ tư duy tương tác theo phương pháp 5W1H2C5M</p>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-2 flex-wrap">
+            <!-- Theme Selector -->
+            <div class="flex items-center gap-1.5 bg-slate-100 p-1 rounded-lg border border-slate-200">
+                <button onclick="setTheme('classic')" id="btn-theme-classic" class="px-3 py-1.5 text-xs font-semibold rounded-md transition-all bg-white text-slate-800 shadow-sm">MISA AMIS</button>
+                <button onclick="setTheme('pastel')" id="btn-theme-pastel" class="px-3 py-1.5 text-xs font-semibold rounded-md transition-all text-slate-600 hover:text-slate-800">Pastel</button>
+                <button onclick="setTheme('neon')" id="btn-theme-neon" class="px-3 py-1.5 text-xs font-semibold rounded-md transition-all text-slate-600 hover:text-slate-800">Tech Dark</button>
+                <button onclick="setTheme('coral')" id="btn-theme-coral" class="px-3 py-1.5 text-xs font-semibold rounded-md transition-all text-slate-600 hover:text-slate-800">Mùa Thu</button>
+            </div>
+
+            <!-- Layout Selector -->
+            <div class="flex items-center gap-1.5 bg-slate-100 p-1 rounded-lg border border-slate-200">
+                <button onclick="setLayout('radial')" id="btn-layout-radial" class="px-3 py-1.5 text-xs font-semibold rounded-md transition-all bg-white text-slate-800 shadow-sm flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.003 9.003 0 1020.945 13H11V3.055z"/></svg>
+                    Bánh xe
+                </button>
+                <button onclick="setLayout('tree')" id="btn-layout-tree" class="px-3 py-1.5 text-xs font-semibold rounded-md transition-all text-slate-600 hover:text-slate-800 flex items-center gap-1">
+                    <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                    Phân nhánh
+                </button>
+            </div>
+
+            <!-- Export Button -->
+            <button onclick="exportPNG()" class="bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white font-medium text-sm px-4 py-2 rounded-lg shadow-lg shadow-indigo-200 flex items-center gap-2 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                Xuất ảnh PNG
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="flex-1 flex overflow-hidden relative">
+        
+        <!-- Sidebar - Node Editor & Quick Guide -->
+        <aside class="w-80 bg-white border-r border-slate-200 flex flex-col shrink-0 z-10 shadow-sm overflow-hidden">
+            <!-- Tabs -->
+            <div class="flex border-b border-slate-100 bg-slate-50">
+                <button onclick="switchSidebarTab('editor')" id="tab-editor" class="flex-1 py-3 text-xs font-semibold text-center border-b-2 border-indigo-600 text-indigo-600">SỬA NỘI DUNG</button>
+                <button onclick="switchSidebarTab('guide')" id="tab-guide" class="flex-1 py-3 text-xs font-semibold text-center text-slate-500 hover:text-slate-800">HƯỚNG DẪN</button>
+            </div>
+
+            <!-- Editor Tab Content -->
+            <div id="content-editor" class="flex-1 overflow-y-auto p-4 space-y-4">
+                <div class="bg-slate-50 border border-slate-100 rounded-lg p-3">
+                    <span class="text-[10px] font-bold text-indigo-600 tracking-wider uppercase">Gợi ý chỉnh sửa</span>
+                    <p class="text-xs text-slate-500 mt-1">Chọn trực tiếp một ô trên bản đồ tư duy hoặc chọn danh sách bên dưới để cập nhật lại nội dung theo mục tiêu của riêng bạn.</p>
+                </div>
+
+                <!-- Selected Node Info -->
+                <div id="selected-node-container" class="hidden space-y-3 bg-indigo-50/50 border border-indigo-100 rounded-xl p-4">
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs font-bold text-indigo-800 uppercase tracking-wide" id="selected-node-label">Đang chỉnh sửa</span>
+                        <button onclick="deselectNode()" class="text-slate-400 hover:text-slate-600 text-xs">Hủy</button>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Tiêu đề chính:</label>
+                        <input type="text" id="edit-node-title" oninput="updateSelectedNode()" class="w-full text-sm border border-slate-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-shadow">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Mô tả / Chi tiết:</label>
+                        <textarea id="edit-node-desc" rows="3" oninput="updateSelectedNode()" class="w-full text-xs border border-slate-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-shadow"></textarea>
+                    </div>
+                </div>
+
+                <!-- Full Node List for quick editing -->
+                <div class="space-y-2.5">
+                    <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider">Danh sách 13 nhánh</h3>
+                    <div id="node-list" class="space-y-1">
+                        <!-- Filled dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guide Tab Content -->
+            <div id="content-guide" class="hidden flex-1 overflow-y-auto p-5 space-y-4 text-sm text-slate-600">
+                <h3 class="font-bold text-slate-950 text-base">Mẹo trình bày đạt điểm tối đa</h3>
+                <p>Giảng viên đại học luôn thích sự thực tế và tính khả thi trong kế hoạch. Dưới đây là cách bạn bảo vệ kế hoạch 5W1H2C5M này trước hội đồng:</p>
+                
+                <div class="space-y-3 mt-2">
+                    <div class="flex gap-2.5 items-start">
+                        <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold shrink-0">1</span>
+                        <p class="text-xs"><strong>Nhấn mạnh tính kết nối:</strong> Giải thích tại sao <strong>Money (Tài chính)</strong> ảnh hưởng đến việc mua <strong>Materials (Sách vở)</strong> hay đăng ký thi <strong>Check (Mock test)</strong>.</p>
+                    </div>
+                    <div class="flex gap-2.5 items-start">
+                        <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold shrink-0">2</span>
+                        <p class="text-xs"><strong>Quản trị rủi ro:</strong> Nêu bật nhánh <strong>Control (Kiểm soát)</strong>. Ví dụ: Nếu nản chí giữa chừng, bạn sẽ dựa vào <strong>Who (Bạn học cùng)</strong> để thúc đẩy động lực.</p>
+                    </div>
+                    <div class="flex gap-2.5 items-start">
+                        <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold shrink-0">3</span>
+                        <p class="text-xs"><strong>Thao tác bản đồ:</strong>
+                            <br>• Cuộn chuột để Phóng to / Thu nhỏ.
+                            <br>• Nhấn giữ chuột trái và kéo nền để Di chuyển sơ đồ.
+                            <br>• Nhấp đúp chuột vào bất kỳ ô nào để sửa trực tiếp văn bản.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-slate-100">
+                    <h4 class="font-semibold text-slate-900 mb-1 text-xs">Phương pháp 5W1H2C5M là gì?</h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">Là mô hình quản trị kế hoạch toàn diện kết hợp giữa Tư duy hướng mục tiêu (5W1H), Đo lường kiểm soát (2C), và Tối ưu hóa mọi nguồn lực hiện có (5M).</p>
+                </div>
+            </div>
+
+            <!-- Footer / Watermark info -->
+            <div class="p-4 bg-slate-50 border-t border-slate-150 text-[11px] text-slate-400 text-center shrink-0">
+                Lập trình viên hỗ trợ học tập • 2026
+            </div>
+        </aside>
+
+        <!-- Canvas Container -->
+        <div class="flex-1 h-full bg-slate-50 relative overflow-hidden" id="canvas-wrapper">
+            <!-- Floating Navigation Helpers -->
+            <div class="absolute bottom-5 right-5 flex flex-col gap-2 z-10">
+                <button onclick="zoomIn()" class="w-10 h-10 bg-white hover:bg-slate-50 active:bg-slate-100 text-slate-700 rounded-lg shadow-md border border-slate-200 flex items-center justify-center transition-transform hover:scale-105" title="Phóng to">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                </button>
+                <button onclick="zoomOut()" class="w-10 h-10 bg-white hover:bg-slate-50 active:bg-slate-100 text-slate-700 rounded-lg shadow-md border border-slate-200 flex items-center justify-center transition-transform hover:scale-105" title="Thu nhỏ">
+                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/></svg>
+                </button>
+                <button onclick="resetView()" class="w-10 h-10 bg-white hover:bg-slate-50 active:bg-slate-100 text-slate-700 rounded-lg shadow-md border border-slate-200 flex items-center justify-center transition-transform hover:scale-105" title="Khôi phục góc nhìn">
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 8H18"/></svg>
+                </button>
+            </div>
+
+            <!-- Floating Notification Message Box (replaces browser alert) -->
+            <div id="toast" class="absolute top-5 left-1/2 -translate-x-1/2 bg-slate-900/90 text-white text-xs px-4 py-2.5 rounded-full shadow-lg z-20 flex items-center gap-2 transition-all opacity-0 pointer-events-none duration-300">
+                <span id="toast-text">Sẵn sàng!</span>
+            </div>
+
+            <!-- Interactive Canvas -->
+            <canvas id="mindmap-canvas" class="w-full h-full block"></canvas>
+        </div>
+    </main>
+
+    <!-- JS Core Logic -->
+    <script>
+        // Data Structure for 5W1H2C5M
+        const initialNodes = {
+            id: 'root',
+            title: 'IELTS 7.0 (Năm 2)',
+            desc: 'Kế hoạch hành động chi tiết',
+            category: 'root',
+            x: 0,
+            y: 0,
+            children: [
+                {
+                    id: 'group-5w',
+                    title: 'ĐỊNH HƯỚNG (5W)',
+                    category: '5w',
+                    children: [
+                        { id: 'node-01', num: '01', title: 'What (Mục tiêu)', desc: 'Đạt Overall 7.0 (L:7.5, R:7.5, S:6.5, W:6.0)', category: '5w' },
+                        { id: 'node-02', num: '02', title: 'Why (Động lực)', desc: 'Miễn học tiếng Anh ở trường, đọc tài liệu khoa học', category: '5w' },
+                        { id: 'node-03', num: '03', title: 'When (Lộ trình)', desc: 'Năm 1: Nền tảng | Năm 2 Kì 1: Luyện đề | Năm 2 Kì 2: Thi', category: '5w' },
+                        { id: 'node-04', num: '04', title: 'Where (Địa điểm)', desc: 'Tự học tại phòng trọ, thư viện trường, CLB tiếng Anh', category: '5w' },
+                        { id: 'node-05', num: '05', title: 'Who (Nhân sự)', desc: 'Chính mình, Bạn cùng học (Study buddy), Thầy cô chấm bài', category: '5w' }
+                    ]
+                },
+                {
+                    id: 'group-1h',
+                    title: 'PHƯƠNG PHÁP (1H)',
+                    category: '1h',
+                    children: [
+                        { id: 'node-06', num: '06', title: 'How (Cách học)', desc: 'Active Recall, Spaced Repetition, Tắm ngôn ngữ hàng ngày', category: '1h' }
+                    ]
+                },
+                {
+                    id: 'group-2c',
+                    title: 'KIỂM SOÁT (2C)',
+                    category: '2c',
+                    children: [
+                        { id: 'node-07', num: '07', title: 'Control (Giám sát)', desc: 'Sắp xếp lịch qua Google Calendar, cam kết học 2h/ngày', category: '2c' },
+                        { id: 'node-08', num: '08', title: 'Check (Đánh giá)', desc: 'Làm Mock Test thi thử định kỳ mỗi cuối tháng', category: '2c' }
+                    ]
+                },
+                {
+                    id: 'group-5m',
+                    title: 'NGUỒN LỰC (5M)',
+                    category: '5m',
+                    children: [
+                        { id: 'node-09', num: '09', title: 'Man (Bản thân)', desc: 'Tinh thần tập trung cao độ và tính kỷ luật tuyệt đối', category: '5m' },
+                        { id: 'node-10', num: '10', title: 'Money (Tài chính)', desc: 'Quỹ đóng lệ phí thi (4.6tr) và tiền mua sách/app học', category: '5m' },
+                        { id: 'node-11', num: '11', title: 'Materials (Tài liệu)', desc: 'Bộ sách Cambridge 11-20, IELTS Simon, Collins', category: '5m' },
+                        { id: 'node-12', num: '12', title: 'Machines (Thiết bị)', desc: 'Laptop viết bài, Smartphone nghe podcast, tai nghe cách âm', category: '5m' },
+                        { id: 'node-13', num: '13', title: 'Method (Chiến thuật)', desc: 'Học nói theo Shadowing, viết bài theo Linear Thinking', category: '5m' }
+                    ]
+                }
+            ]
+        };
+
+        // Theme Configurations
+        const themes = {
+            classic: {
+                bg: '#f8fafc',
+                grid: '#e2e8f0',
+                root: { fill: '#1e40af', stroke: '#1d4ed8', text: '#ffffff', subtext: '#93c5fd' },
+                '5w': { fill: '#fff7ed', stroke: '#f97316', text: '#431407', badgeBg: '#ffedd5', badgeText: '#ea580c' },
+                '1h': { fill: '#f0f9ff', stroke: '#0284c7', text: '#082f49', badgeBg: '#e0f2fe', badgeText: '#0284c7' },
+                '2c': { fill: '#f0fdf4', stroke: '#22c55e', text: '#052e16', badgeBg: '#dcfce7', badgeText: '#15803d' },
+                '5m': { fill: '#faf5ff', stroke: '#a855f7', text: '#2e1065', badgeBg: '#f3e8ff', badgeText: '#9333ea' },
+                line: '#cbd5e1'
+            },
+            pastel: {
+                bg: '#fafaf9',
+                grid: '#f5f5f4',
+                root: { fill: '#f43f5e', stroke: '#fb7185', text: '#ffffff', subtext: '#ffe4e6' },
+                '5w': { fill: '#fffbeb', stroke: '#fcd34d', text: '#78350f', badgeBg: '#fef3c7', badgeText: '#b45309' },
+                '1h': { fill: '#f0fdfa', stroke: '#5eead4', text: '#115e59', badgeBg: '#ccfbf1', badgeText: '#0f766e' },
+                '2c': { fill: '#f0fdf4', stroke: '#86efac', text: '#14532d', badgeBg: '#dcfce7', badgeText: '#16a34a' },
+                '5m': { fill: '#fdf4ff', stroke: '#f0abfc', text: '#581c87', badgeBg: '#fae8ff', badgeText: '#c084fc' },
+                line: '#e7e5e4'
+            },
+            neon: {
+                bg: '#0f172a',
+                grid: '#1e293b',
+                root: { fill: '#3b82f6', stroke: '#60a5fa', text: '#ffffff', subtext: '#93c5fd' },
+                '5w': { fill: '#1e1b4b', stroke: '#818cf8', text: '#e0e7ff', badgeBg: '#312e81', badgeText: '#c7d2fe' },
+                '1h': { fill: '#0c4a6e', stroke: '#38bdf8', text: '#f0f9ff', badgeBg: '#0369a1', badgeText: '#bae6fd' },
+                '2c': { fill: '#064e3b', stroke: '#34d399', text: '#ecfdf5', badgeBg: '#047857', badgeText: '#a7f3d0' },
+                '5m': { fill: '#4c1d95', stroke: '#c084fc', text: '#faf5ff', badgeBg: '#5b21b6', badgeText: '#f3e8ff' },
+                line: '#334155'
+            },
+            coral: {
+                bg: '#fffbf7',
+                grid: '#f5ebe0',
+                root: { fill: '#b05e46', stroke: '#c36a50', text: '#ffffff', subtext: '#f2ded9' },
+                '5w': { fill: '#fff8f6', stroke: '#e07a5f', text: '#3d1c13', badgeBg: '#fbe9e4', badgeText: '#e07a5f' },
+                '1h': { fill: '#f4f7f6', stroke: '#81b29a', text: '#1f3a2b', badgeBg: '#e2ece9', badgeText: '#81b29a' },
+                '2c': { fill: '#fcfaf2', stroke: '#f2cc8f', text: '#3d2f13', badgeBg: '#fdf6e2', badgeText: '#f2cc8f' },
+                '5m': { fill: '#f9f6f0', stroke: '#3d405b', text: '#1d203b', badgeBg: '#ebebf2', badgeText: '#3d405b' },
+                line: '#dfd5ca'
+            }
+        };
+
+        // App State
+        let currentTheme = 'classic';
+        let currentLayout = 'radial';
+        let selectedNodeId = null;
+        let scale = 1;
+        let panX = 0;
+        let panY = 0;
+        let isDraggingCanvas = false;
+        let dragStartX = 0;
+        let dragStartY = 0;
+        let draggedNode = null;
+        let dragNodeOffsetX = 0;
+        let dragNodeOffsetY = 0;
+        let animationFrameId = null;
+
+        // Flatten nodes map for easier lookups and rendering
+        let nodesList = [];
+
+        // Setup Canvas
+        const canvas = document.getElementById('mindmap-canvas');
+        const ctx = canvas.getContext('2d');
+        const wrapper = document.getElementById('canvas-wrapper');
+
+        // Initial launch
+        window.addEventListener('load', () => {
+            initData();
+            resizeCanvas();
+            resetView();
+            render();
+            buildSidebarList();
+
+            // Set up Toast notification
+            showToast("Đã tải sơ đồ tư duy IELTS 5W1H2C5M thành công!");
+        });
+
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            render();
+        });
+
+        // Track and scale Canvas resolution for retina displays
+        function resizeCanvas() {
+            const rect = wrapper.getBoundingClientRect();
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            canvas.style.width = rect.width + 'px';
+            canvas.style.height = rect.height + 'px';
+            ctx.scale(dpr, dpr);
+        }
+
+        // Transform initial hierarchical structure to a flatter list with positioned nodes
+        function initData() {
+            nodesList = [];
+            
+            // Central Root
+            const root = {
+                id: initialNodes.id,
+                title: initialNodes.title,
+                desc: initialNodes.desc,
+                category: initialNodes.category,
+                x: 0,
+                y: 0,
+                isRoot: true,
+                width: 220,
+                height: 80
+            };
+            nodesList.push(root);
+
+            // Level 2 / Group nodes
+            initialNodes.children.forEach(group => {
+                const grpNode = {
+                    id: group.id,
+                    title: group.title,
+                    category: group.category,
+                    isGroup: true,
+                    parentId: 'root',
+                    width: 140,
+                    height: 40,
+                    x: 0,
+                    y: 0
+                };
+                nodesList.push(grpNode);
+
+                // Leaf nodes (the 13 principles)
+                group.children.forEach(leaf => {
+                    const leafNode = {
+                        id: leaf.id,
+                        num: leaf.num,
+                        title: leaf.title,
+                        desc: leaf.desc,
+                        category: leaf.category,
+                        parentId: group.id,
+                        width: 210,
+                        height: 75,
+                        x: 0,
+                        y: 0
+                    };
+                    nodesList.push(leafNode);
+                });
+            });
+
+            applyLayout();
+        }
+
+        // Apply spatial mathematical layout
+        function applyLayout() {
+            const root = nodesList.find(n => n.isRoot);
+            root.x = 0;
+            root.y = 0;
+
+            if (currentLayout === 'radial') {
+                // Circular layout similar to the MISA AMIS image
+                const groups = nodesList.filter(n => n.isGroup);
+                const leaves = nodesList.filter(n => n.num); // 13 leaves
+
+                // We hide the grouping node connectors visually or tuck them inside the structure. 
+                // For a wheel look, we position the 13 leaves uniformly around the center.
+                const radius = 330;
+                leaves.forEach((leaf, index) => {
+                    // Position circularly
+                    const angle = (2 * Math.PI * index) / leaves.length - Math.PI / 2;
+                    leaf.x = Math.round(radius * Math.cos(angle));
+                    leaf.y = Math.round(radius * Math.sin(angle));
+                });
+
+                // Position the intermediary categories slightly closer to center
+                const groupRadius = 140;
+                groups.forEach((group, index) => {
+                    const angle = (2 * Math.PI * index) / groups.length - Math.PI / 4;
+                    group.x = Math.round(groupRadius * Math.cos(angle));
+                    group.y = Math.round(groupRadius * Math.sin(angle));
+                });
+
+            } else {
+                // Standard Side-to-Side Tree Layout
+                // Left side: 5W (5 nodes). Right side: 1H (1 node), 2C (2 nodes), 5M (5 nodes)
+                const leftGroups = ['5w'];
+                const rightGroups = ['1h', '2c', '5m'];
+
+                // Left Positioning
+                let leftYOffset = -220;
+                const leftLeaves = nodesList.filter(n => leftGroups.includes(n.category) && n.num);
+                leftLeaves.forEach((leaf, idx) => {
+                    leaf.x = -360;
+                    leaf.y = leftYOffset + idx * 110;
+                });
+
+                // Left category group label
+                const g5w = nodesList.find(n => n.id === 'group-5w');
+                if (g5w) {
+                    g5w.x = -180;
+                    g5w.y = 0;
+                }
+
+                // Right Positioning
+                let rightYOffset = -280;
+                const rightLeaves = nodesList.filter(n => rightGroups.includes(n.category) && n.num);
+                rightLeaves.forEach((leaf, idx) => {
+                    leaf.x = 360;
+                    leaf.y = rightYOffset + idx * 100;
+                });
+
+                // Right category group labels
+                const g1h = nodesList.find(n => n.id === 'group-1h');
+                if (g1h) { g1h.x = 180; g1h.y = -220; }
+                
+                const g2c = nodesList.find(n => n.id === 'group-2c');
+                if (g2c) { g2c.x = 180; g2c.y = -100; }
+
+                const g5m = nodesList.find(n => n.id === 'group-5m');
+                if (g5m) { g5m.x = 180; g5m.y = 150; }
+            }
+        }
+
+        // Render Loop for Drawing Canvas
+        function render() {
+            if (!canvas) return;
+            const width = canvas.width / (window.devicePixelRatio || 1);
+            const height = canvas.height / (window.devicePixelRatio || 1);
+
+            // Clear screen
+            ctx.fillStyle = themes[currentTheme].bg;
+            ctx.fillRect(0, 0, width, height);
+
+            // Draw grid pattern (subtle background points)
+            ctx.fillStyle = themes[currentTheme].grid;
+            const gridSize = 30;
+            const startX = (panX * scale) % gridSize;
+            const startY = (panY * scale) % gridSize;
+            for (let x = startX; x < width; x += gridSize) {
+                for (let y = startY; y < height; y += gridSize) {
+                    ctx.beginPath();
+                    ctx.arc(x, y, 1, 0, 2 * Math.PI);
+                    ctx.fill();
+                }
+            }
+
+            // Save state, apply translation and scaling for viewport
+            ctx.save();
+            ctx.translate(width / 2 + panX, height / 2 + panY);
+            ctx.scale(scale, scale);
+
+            // 1. Draw connecting lines
+            drawConnections();
+
+            // 2. Draw nodes
+            drawNodes();
+
+            ctx.restore();
+        }
+
+        // Draw curved Bezier connection lines
+        function drawConnections() {
+            const theme = themes[currentTheme];
+            ctx.lineWidth = 2.5;
+            ctx.strokeStyle = theme.line;
+
+            nodesList.forEach(node => {
+                if (node.parentId) {
+                    const parent = nodesList.find(n => n.id === node.parentId);
+                    if (parent) {
+                        // Source coordinate (parent center or edge)
+                        const fromX = parent.x;
+                        const fromY = parent.y;
+                        const toX = node.x;
+                        const toY = node.y;
+
+                        ctx.beginPath();
+                        ctx.strokeStyle = theme[node.category]?.stroke || theme.line;
+                        
+                        if (currentLayout === 'radial') {
+                            // Straight smooth lines radiating outward in wheel
+                            ctx.moveTo(fromX, fromY);
+                            ctx.lineTo(toX, toY);
+                        } else {
+                            // Smooth Bezier curve for classic tree hierarchical aesthetics
+                            const midX = (fromX + toX) / 2;
+                            ctx.moveTo(fromX, fromY);
+                            ctx.bezierCurveTo(midX, fromY, midX, toY, toX, toY);
+                        }
+                        ctx.stroke();
+                    }
+                }
+            });
+
+            // Additionally link the Groups to central Root in Radial layout
+            if (currentLayout === 'radial') {
+                const root = nodesList.find(n => n.isRoot);
+                const leaves = nodesList.filter(n => n.num);
+                ctx.lineWidth = 1;
+                ctx.strokeStyle = theme.line + '55'; // Transparent grey
+
+                // Draw an elegant outer circular track
+                ctx.beginPath();
+                ctx.arc(root.x, root.y, 330, 0, 2 * Math.PI);
+                ctx.stroke();
+            }
+        }
+
+        // Draw individual nodes on the canvas
+        function drawNodes() {
+            const theme = themes[currentTheme];
+
+            nodesList.forEach(node => {
+                const isSelected = node.id === selectedNodeId;
+                
+                // Get style block based on node category
+                const style = node.isRoot ? theme.root : (theme[node.category] || theme.root);
+                
+                // Card dimensions
+                const w = node.width;
+                const h = node.height;
+                const x = node.x - w / 2;
+                const y = node.y - h / 2;
+
+                // Shadow effect
+                ctx.shadowColor = isSelected ? 'rgba(79, 70, 229, 0.4)' : 'rgba(0, 0, 0, 0.05)';
+                ctx.shadowBlur = isSelected ? 12 : 5;
+                ctx.shadowOffsetX = 0;
+                ctx.shadowOffsetY = 3;
+
+                // Card background (Rounded Rectangle)
+                ctx.fillStyle = style.fill;
+                ctx.strokeStyle = isSelected ? '#4f46e5' : style.stroke;
+                ctx.lineWidth = isSelected ? 3.5 : 2;
+                
+                drawRoundedRect(ctx, x, y, w, h, node.isRoot ? 12 : 8);
+                ctx.fill();
+                ctx.stroke();
+
+                // Clear shadow for text drawing
+                ctx.shadowBlur = 0;
+                ctx.shadowOffsetX = 0;
+                ctx.shadowOffsetY = 0;
+
+                // Card Text Content
+                if (node.isRoot) {
+                    // Central Node drawing
+                    ctx.fillStyle = style.text;
+                    ctx.font = 'bold 15px Inter';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(node.title, node.x, node.y - 5);
+
+                    ctx.fillStyle = style.subtext;
+                    ctx.font = '500 11px Inter';
+                    ctx.fillText(node.desc, node.x, node.y + 15);
+                } 
+                else if (node.isGroup) {
+                    // Category group label drawing
+                    ctx.fillStyle = style.stroke;
+                    ctx.font = 'bold 12px Inter';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(node.title, node.x, node.y + 4);
+                } 
+                else {
+                    // Leaf nodes (13 principles)
+                    // Draw a little index number badge
+                    const badgeSize = 20;
+                    const badgeX = x + 10;
+                    const badgeY = y + 10;
+
+                    ctx.fillStyle = style.badgeBg;
+                    drawRoundedRect(ctx, badgeX, badgeY, badgeSize, badgeSize, 4);
+                    ctx.fill();
+
+                    ctx.fillStyle = style.badgeText;
+                    ctx.font = 'bold 10px Inter';
+                    ctx.textAlign = 'center';
+                    ctx.fillText(node.num || '00', badgeX + badgeSize/2, badgeY + badgeSize/2 + 3);
+
+                    // Draw Title Text
+                    ctx.fillStyle = '#0f172a'; // dark slate for readability
+                    if (currentTheme === 'neon') ctx.fillStyle = '#faf5ff';
+                    ctx.font = 'bold 12px Inter';
+                    ctx.textAlign = 'left';
+                    ctx.fillText(node.title, x + 38, y + 24);
+
+                    // Draw Description with text wrapping
+                    ctx.fillStyle = '#64748b'; // slate grey
+                    if (currentTheme === 'neon') ctx.fillStyle = '#94a3b8';
+                    ctx.font = '400 10px Inter';
+                    wrapText(ctx, node.desc, x + 12, y + 44, w - 24, 14);
+                }
+            });
+        }
+
+        // Helper: Draw rounded rectangles
+        function drawRoundedRect(ctx, x, y, width, height, radius) {
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + width - radius, y);
+            ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+            ctx.lineTo(x + width, y + height - radius);
+            ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            ctx.lineTo(x + radius, y + height);
+            ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+            ctx.lineTo(x, y + radius);
+            ctx.quadraticCurveTo(x, y, x + radius, y);
+            ctx.closePath();
+        }
+
+        // Helper: Wrap canvas text elegantly
+        function wrapText(context, text, x, y, maxWidth, lineHeight) {
+            const words = text.split(' ');
+            let line = '';
+            let linesDrawn = 0;
+
+            for (let n = 0; n < words.length; n++) {
+                let testLine = line + words[n] + ' ';
+                let metrics = context.measureText(testLine);
+                let testWidth = metrics.width;
+                if (testWidth > maxWidth && n > 0) {
+                    context.fillText(line, x, y);
+                    line = words[n] + ' ';
+                    y += lineHeight;
+                    linesDrawn++;
+                    if (linesDrawn >= 2) return; // limit to maximum 2 lines to prevent card overflowing
+                } else {
+                    line = testLine;
+                }
+            }
+            context.fillText(line, x, y);
+        }
+
+        // Interactive Events: Mouse, Zoom, Pan
+        canvas.addEventListener('mousedown', (e) => {
+            const mPos = getMousePosOnCanvas(e);
+            
+            // Check if user clicked a node
+            const clickedNode = findNodeAtPosition(mPos.x, mPos.y);
+
+            if (clickedNode) {
+                selectedNodeId = clickedNode.id;
+                draggedNode = clickedNode;
+                dragNodeOffsetX = mPos.x - clickedNode.x;
+                dragNodeOffsetY = mPos.y - clickedNode.y;
+                
+                // Show in sidebar editor
+                selectNodeInEditor(clickedNode);
+                render();
+            } else {
+                // Drag canvas background (panning)
+                isDraggingCanvas = true;
+                dragStartX = e.clientX - panX;
+                dragStartY = e.clientY - panY;
+            }
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (draggedNode) {
+                // Free drag and drop positioning
+                const mPos = getMousePosOnCanvas(e);
+                draggedNode.x = Math.round(mPos.x - dragNodeOffsetX);
+                draggedNode.y = Math.round(mPos.y - dragNodeOffsetY);
+                render();
+            } else if (isDraggingCanvas) {
+                // Panning canvas
+                panX = e.clientX - dragStartX;
+                panY = e.clientY - dragStartY;
+                render();
+            }
+        });
+
+        window.addEventListener('mouseup', () => {
+            isDraggingCanvas = false;
+            draggedNode = null;
+        });
+
+        // Touch gestures support (Mobile/Tablets)
+        canvas.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 1) {
+                const touch = e.touches[0];
+                const rect = canvas.getBoundingClientRect();
+                const scaleX = canvas.width / (rect.width * window.devicePixelRatio || 1);
+                const scaleY = canvas.height / (rect.height * window.devicePixelRatio || 1);
+                
+                const clientX = touch.clientX - rect.left;
+                const clientY = touch.clientY - rect.top;
+
+                // Adjust for zoom scale and translate offset
+                const x = (clientX - (rect.width/2 + panX)) / scale;
+                const y = (clientY - (rect.height/2 + panY)) / scale;
+
+                const clickedNode = findNodeAtPosition({ x, y });
+                if (clickedNode) {
+                    selectedNodeId = clickedNode.id;
+                    draggedNode = clickedNode;
+                    dragNodeOffsetX = x - clickedNode.x;
+                    dragNodeOffsetY = y - clickedNode.y;
+                    selectNodeInEditor(clickedNode);
+                    render();
+                } else {
+                    isDraggingCanvas = true;
+                    dragStartX = touch.clientX - panX;
+                    dragStartY = touch.clientY - panY;
+                }
+            }
+        });
+
+        canvas.addEventListener('touchmove', (e) => {
+            if (e.touches.length === 1) {
+                const touch = e.touches[0];
+                if (draggedNode) {
+                    const rect = canvas.getBoundingClientRect();
+                    const clientX = touch.clientX - rect.left;
+                    const clientY = touch.clientY - rect.top;
+                    const x = (clientX - (rect.width/2 + panX)) / scale;
+                    const y = (clientY - (rect.height/2 + panY)) / scale;
+                    
+                    draggedNode.x = Math.round(x - dragNodeOffsetX);
+                    draggedNode.y = Math.round(y - dragNodeOffsetY);
+                    render();
+                } else if (isDraggingCanvas) {
+                    panX = touch.clientX - dragStartX;
+                    panY = touch.clientY - dragStartY;
+                    render();
+                }
+            }
+        });
+
+        canvas.addEventListener('touchend', () => {
+            isDraggingCanvas = false;
+            draggedNode = null;
+        });
+
+        // Wheel zooming
+        canvas.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            const zoomIntensity = 0.1;
+            if (e.deltaY < 0) {
+                zoomIn(zoomIntensity);
+            } else {
+                zoomOut(zoomIntensity);
+            }
+        });
+
+        // Convert page coordinates to simulated canvas space coordinates
+        function getMousePosOnCanvas(e) {
+            const rect = canvas.getBoundingClientRect();
+            
+            // Mouse click relative to canvas viewport
+            const clickX = e.clientX - rect.left;
+            const clickY = e.clientY - rect.top;
+
+            // Subtract pan and scale factors to align with central origin coordinates
+            const x = (clickX - (rect.width / 2 + panX)) / scale;
+            const y = (clickY - (rect.height / 2 + panY)) / scale;
+
+            return { x, y };
+        }
+
+        // Detect if coordinate lands inside a card
+        function findNodeAtPosition(x, y) {
+            // Traverse from top (reverse) so overlaying top elements clicked first
+            for (let i = nodesList.length - 1; i >= 0; i--) {
+                const node = nodesList[i];
+                const halfW = node.width / 2;
+                const halfH = node.height / 2;
+                if (x >= node.x - halfW && x <= node.x + halfW &&
+                    y >= node.y - halfH && y <= node.y + halfH) {
+                    return node;
+                }
+            }
+            return null;
+        }
+
+        // Set layout design
+        function setLayout(layoutType) {
+            currentLayout = layoutType;
+            
+            // Stylize tabs
+            const btnRadial = document.getElementById('btn-layout-radial');
+            const btnTree = document.getElementById('btn-layout-tree');
+            
+            if (layoutType === 'radial') {
+                btnRadial.className = "px-3 py-1.5 text-xs font-semibold rounded-md transition-all bg-white text-slate-800 shadow-sm flex items-center gap-1";
+                btnTree.className = "px-3 py-1.5 text-xs font-semibold rounded-md transition-all text-slate-600 hover:text-slate-800 flex items-center gap-1";
+            } else {
+                btnTree.className = "px-3 py-1.5 text-xs font-semibold rounded-md transition-all bg-white text-slate-800 shadow-sm flex items-center gap-1";
+                btnRadial.className = "px-3 py-1.5 text-xs font-semibold rounded-md transition-all text-slate-600 hover:text-slate-800 flex items-center gap-1";
+            }
+
+            applyLayout();
+            resetView();
+            render();
+            showToast("Đã đổi sang giao diện: " + (layoutType === 'radial' ? 'Bánh xe Radial' : 'Rẽ nhánh cổ điển'));
+        }
+
+        // Set visual theme
+        function setTheme(themeName) {
+            currentTheme = themeName;
+            
+            // Toggle active classes on buttons
+            const themeBtnIds = ['classic', 'pastel', 'neon', 'coral'];
+            themeBtnIds.forEach(t => {
+                const btn = document.getElementById(`btn-theme-${t}`);
+                if (t === themeName) {
+                    btn.className = "px-3 py-1.5 text-xs font-semibold rounded-md transition-all bg-white text-slate-800 shadow-sm";
+                } else {
+                    btn.className = "px-3 py-1.5 text-xs font-semibold rounded-md transition-all text-slate-600 hover:text-slate-800";
+                }
+            });
+
+            render();
+            showToast("Đã đổi bảng màu: " + themeName.toUpperCase());
+        }
+
+        // UI Interactions
+        function zoomIn(amt = 0.15) {
+            scale = Math.min(2.5, scale + amt);
+            render();
+        }
+
+        // Zoom Out
+        function zoomOut(amt = 0.15) {
+            scale = Math.max(0.4, scale - amt);
+            render();
+        }
+
+        // Reset View zoom level
+        function resetView() {
+            scale = 0.85;
+            panX = 0;
+            panY = 0;
+            render();
+        }
+
+        // Show toast notification
+        function showToast(text) {
+            const toast = document.getElementById('toast');
+            const toastText = document.getElementById('toast-text');
+            toastText.innerText = text;
+            toast.className = "absolute top-5 left-1/2 -translate-x-1/2 bg-slate-900/90 text-white text-xs px-4 py-2.5 rounded-full shadow-lg z-20 flex items-center gap-2 transition-all opacity-100 pointer-events-auto duration-300";
+            
+            setTimeout(() => {
+                toast.className = "absolute top-5 left-1/2 -translate-x-1/2 bg-slate-900/90 text-white text-xs px-4 py-2.5 rounded-full shadow-lg z-20 flex items-center gap-2 transition-all opacity-0 pointer-events-none duration-300";
+            }, 3000);
+        }
+
+        // Switch Sidebar Panel
+        function switchSidebarTab(tab) {
+            const editorBtn = document.getElementById('tab-editor');
+            const guideBtn = document.getElementById('tab-guide');
+            const editorContent = document.getElementById('content-editor');
+            const guideContent = document.getElementById('content-guide');
+
+            if (tab === 'editor') {
+                editorBtn.className = "flex-1 py-3 text-xs font-semibold text-center border-b-2 border-indigo-600 text-indigo-600";
+                guideBtn.className = "flex-1 py-3 text-xs font-semibold text-center text-slate-500 hover:text-slate-800";
+                editorContent.classList.remove('hidden');
+                guideContent.classList.add('hidden');
+            } else {
+                guideBtn.className = "flex-1 py-3 text-xs font-semibold text-center border-b-2 border-indigo-600 text-indigo-600";
+                editorBtn.className = "flex-1 py-3 text-xs font-semibold text-center text-slate-500 hover:text-slate-800";
+                guideContent.classList.remove('hidden');
+                editorContent.classList.add('hidden');
+            }
+        }
+
+        // Selecting a node and filling up form editor
+        function selectNodeInEditor(node) {
+            const container = document.getElementById('selected-node-container');
+            const titleInput = document.getElementById('edit-node-title');
+            const descInput = document.getElementById('edit-node-desc');
+            const label = document.getElementById('selected-node-label');
+
+            container.classList.remove('hidden');
+            label.innerText = node.num ? `NHÁNH ${node.num}` : "NHÁNH CHỦ ĐỀ";
+            titleInput.value = node.title;
+            descInput.value = node.desc || '';
+
+            // Highlight the selected node in the sidebar list too
+            const listItems = document.querySelectorAll('.node-list-item');
+            listItems.forEach(item => {
+                item.classList.remove('bg-indigo-50', 'border-indigo-200');
+            });
+            const selectedItem = document.getElementById(`list-item-${node.id}`);
+            if (selectedItem) {
+                selectedItem.classList.add('bg-indigo-50', 'border-indigo-200');
+            }
+        }
+
+        // Deselect currently highlighted node
+        function deselectNode() {
+            selectedNodeId = null;
+            document.getElementById('selected-node-container').classList.add('hidden');
+            
+            const listItems = document.querySelectorAll('.node-list-item');
+            listItems.forEach(item => {
+                item.classList.remove('bg-indigo-50', 'border-indigo-200');
+            });
+
+            render();
+        }
+
+        // Keep values in sync as user types
+        function updateSelectedNode() {
+            if (!selectedNodeId) return;
+            const node = nodesList.find(n => n.id === selectedNodeId);
+            if (node) {
+                node.title = document.getElementById('edit-node-title').value;
+                node.desc = document.getElementById('edit-node-desc').value;
+                
+                // Update text in lists
+                const listText = document.querySelector(`#list-item-${node.id} .node-title-txt`);
+                if (listText) listText.innerText = node.title;
+
+                render();
+            }
+        }
+
+        // Build list of all principles in sidebar
+        function buildSidebarList() {
+            const container = document.getElementById('node-list');
+            container.innerHTML = '';
+
+            nodesList.forEach(node => {
+                if (node.isGroup) return; // Skip categories for list simplicity
+
+                const item = document.createElement('div');
+                item.id = `list-item-${node.id}`;
+                item.className = "node-list-item border border-slate-100 p-2.5 rounded-lg text-left cursor-pointer transition-colors hover:bg-slate-50 flex gap-2 items-center";
+                
+                // Set click action
+                item.onclick = () => {
+                    selectedNodeId = node.id;
+                    selectNodeInEditor(node);
+                    render();
+                };
+
+                // Left badge icon/number
+                const badge = document.createElement('span');
+                if (node.isRoot) {
+                    badge.innerHTML = "🎯";
+                    badge.className = "text-sm";
+                } else {
+                    badge.innerText = node.num;
+                    badge.className = "text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-600";
+                }
+
+                // Node summary details
+                const detailWrap = document.createElement('div');
+                detailWrap.className = "flex-1 min-w-0";
+                
+                const title = document.createElement('h4');
+                title.className = "node-title-txt text-xs font-semibold text-slate-800 truncate";
+                title.innerText = node.title;
+
+                const desc = document.createElement('p');
+                desc.className = "text-[10px] text-slate-400 truncate";
+                desc.innerText = node.desc || '';
+
+                detailWrap.appendChild(title);
+                detailWrap.appendChild(desc);
+
+                item.appendChild(badge);
+                item.appendChild(detailWrap);
+
+                container.appendChild(item);
+            });
+        }
+
+        // Advanced PNG High Resolution Export logic using HTML5 Canvas
+        function exportPNG() {
+            showToast("Đang kết xuất ảnh chất lượng cao...");
+
+            // Temporarily reset view zoom and translate settings to capture the whole graph fully centered
+            const prevScale = scale;
+            const prevPanX = panX;
+            const prevPanY = panY;
+            const prevSelectedId = selectedNodeId;
+
+            // Compute actual bounding box of all nodes
+            let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+            nodesList.forEach(n => {
+                const hw = n.width / 2;
+                const hh = n.height / 2;
+                if (n.x - hw < minX) minX = n.x - hw;
+                if (n.x + hw > maxX) maxX = n.x + hw;
+                if (n.y - hh < minY) minY = n.y - hh;
+                if (n.y + hh > maxY) maxY = n.y + hh;
+            });
+
+            // Add margin padding to export
+            const padding = 60;
+            const expWidth = (maxX - minX) + padding * 2;
+            const expHeight = (maxY - minY) + padding * 2;
+
+            // Create temporary high-res export canvas
+            const expCanvas = document.createElement('canvas');
+            expCanvas.width = expWidth * 2; // scale by 2 for Ultra HD resolution
+            expCanvas.height = expHeight * 2;
+            const expCtx = expCanvas.getContext('2d');
+            expCtx.scale(2, 2);
+
+            // Fill background
+            expCtx.fillStyle = themes[currentTheme].bg;
+            expCtx.fillRect(0, 0, expWidth, expHeight);
+
+            // Set coordinates translation so mindmap coordinates are correctly centered in the bounding box
+            expCtx.save();
+            const centerX = expWidth / 2 - (minX + maxX) / 2;
+            const centerY = expHeight / 2 - (minY + maxY) / 2;
+            expCtx.translate(centerX, centerY);
+
+            // Draw connection lines on export canvas
+            expCtx.lineWidth = 2.5;
+            expCtx.strokeStyle = themes[currentTheme].line;
+            nodesList.forEach(node => {
+                if (node.parentId) {
+                    const parent = nodesList.find(n => n.id === node.parentId);
+                    if (parent) {
+                        expCtx.beginPath();
+                        expCtx.strokeStyle = themes[currentTheme][node.category]?.stroke || themes[currentTheme].line;
+                        if (currentLayout === 'radial') {
+                            expCtx.moveTo(parent.x, parent.y);
+                            expCtx.lineTo(node.x, node.y);
+                        } else {
+                            const midX = (parent.x + node.x) / 2;
+                            expCtx.moveTo(parent.x, parent.y);
+                            expCtx.bezierCurveTo(midX, parent.y, midX, node.y, node.x, node.y);
+                        }
+                        expCtx.stroke();
+                    }
+                }
+            });
+
+            // Radial outer loop helper for export
+            if (currentLayout === 'radial') {
+                const root = nodesList.find(n => n.isRoot);
+                expCtx.lineWidth = 1;
+                expCtx.strokeStyle = themes[currentTheme].line + '55';
+                expCtx.beginPath();
+                expCtx.arc(root.x, root.y, 330, 0, 2 * Math.PI);
+                expCtx.stroke();
+            }
+
+            // Draw nodes on export canvas
+            nodesList.forEach(node => {
+                const style = node.isRoot ? themes[currentTheme].root : (themes[currentTheme][node.category] || themes[currentTheme].root);
+                const w = node.width;
+                const h = node.height;
+                const x = node.x - w / 2;
+                const y = node.y - h / 2;
+
+                // Simple node shadow
+                expCtx.shadowColor = 'rgba(0, 0, 0, 0.05)';
+                expCtx.shadowBlur = 4;
+                expCtx.shadowOffsetY = 2;
+
+                expCtx.fillStyle = style.fill;
+                expCtx.strokeStyle = style.stroke;
+                expCtx.lineWidth = 2;
+                
+                drawRoundedRect(expCtx, x, y, w, h, node.isRoot ? 12 : 8);
+                expCtx.fill();
+                expCtx.stroke();
+
+                expCtx.shadowBlur = 0;
+                expCtx.shadowOffsetY = 0;
+
+                // Text drawing
+                if (node.isRoot) {
+                    expCtx.fillStyle = style.text;
+                    expCtx.font = 'bold 15px Inter';
+                    expCtx.textAlign = 'center';
+                    expCtx.fillText(node.title, node.x, node.y - 5);
+
+                    expCtx.fillStyle = style.subtext;
+                    expCtx.font = '500 11px Inter';
+                    expCtx.fillText(node.desc, node.x, node.y + 15);
+                } else if (node.isGroup) {
+                    expCtx.fillStyle = style.stroke;
+                    expCtx.font = 'bold 12px Inter';
+                    expCtx.textAlign = 'center';
+                    expCtx.fillText(node.title, node.x, node.y + 4);
+                } else {
+                    const badgeSize = 20;
+                    const badgeX = x + 10;
+                    const badgeY = y + 10;
+
+                    expCtx.fillStyle = style.badgeBg;
+                    drawRoundedRect(expCtx, badgeX, badgeY, badgeSize, badgeSize, 4);
+                    expCtx.fill();
+
+                    expCtx.fillStyle = style.badgeText;
+                    expCtx.font = 'bold 10px Inter';
+                    expCtx.textAlign = 'center';
+                    expCtx.fillText(node.num || '00', badgeX + badgeSize/2, badgeY + badgeSize/2 + 3);
+
+                    expCtx.fillStyle = themes[currentTheme] === 'neon' ? '#faf5ff' : '#0f172a';
+                    expCtx.font = 'bold 12px Inter';
+                    expCtx.textAlign = 'left';
+                    expCtx.fillText(node.title, x + 38, y + 24);
+
+                    expCtx.fillStyle = themes[currentTheme] === 'neon' ? '#94a3b8' : '#64748b';
+                    expCtx.font = '400 10px Inter';
+                    wrapText(expCtx, node.desc, x + 12, y + 44, w - 24, 14);
+                }
+            });
+
+            expCtx.restore();
+
+            // Export to PNG Download Link trigger
+            try {
+                const imgURL = expCanvas.toDataURL('image/png');
+                const downloadLink = document.createElement('a');
+                downloadLink.download = `Ke_Hoach_5W1H2C5M_IELTS_7.0.png`;
+                downloadLink.href = imgURL;
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+                showToast("Đã tải ảnh về thành công!");
+            } catch (err) {
+                // Clipboard fallback support
+                document.execCommand('copy');
+                showToast("Không thể tải trực tiếp, đã lưu dữ liệu clipboard.");
+            }
+        }
+    </script>
+</body>
+</html>

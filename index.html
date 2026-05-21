@@ -84,12 +84,12 @@
     <!-- Main Workspace -->
     <main class="flex-1 flex overflow-hidden relative">
         
-        <!-- Sidebar - Node Editor & Quick Guide -->
+        <!-- Sidebar - Node Editor & AI Assistant -->
         <aside class="w-80 bg-white border-r border-slate-200 flex flex-col shrink-0 z-10 shadow-sm overflow-hidden">
-            <!-- Tabs -->
+            <!-- Tabs (Balanced remaining 2 tabs) -->
             <div class="flex border-b border-slate-100 bg-slate-50">
                 <button onclick="switchSidebarTab('editor')" id="tab-editor" class="flex-1 py-3 text-xs font-semibold text-center border-b-2 border-indigo-600 text-indigo-600">SỬA NỘI DUNG</button>
-                <button onclick="switchSidebarTab('guide')" id="tab-guide" class="flex-1 py-3 text-xs font-semibold text-center text-slate-500 hover:text-slate-800">HƯỚNG DẪN</button>
+                <button onclick="switchSidebarTab('ai')" id="tab-ai" class="flex-1 py-3 text-xs font-semibold text-center text-slate-500 hover:text-slate-800">✨ TRỢ LÝ AI</button>
             </div>
 
             <!-- Editor Tab Content -->
@@ -113,6 +113,11 @@
                         <label class="block text-xs font-semibold text-slate-700 mb-1">Mô tả / Chi tiết:</label>
                         <textarea id="edit-node-desc" rows="3" oninput="updateSelectedNode()" class="w-full text-xs border border-slate-200 rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-shadow"></textarea>
                     </div>
+
+                    <!-- Node-specific AI helper inside editor -->
+                    <button onclick="generateNodeChecklist()" class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white rounded-lg py-2 text-xs font-semibold shadow-md flex items-center justify-center gap-1.5 transition-all transform active:scale-[0.98]">
+                        <span>✨ Phân tích nhánh này bằng AI</span>
+                    </button>
                 </div>
 
                 <!-- Full Node List for quick editing -->
@@ -124,33 +129,65 @@
                 </div>
             </div>
 
-            <!-- Guide Tab Content -->
-            <div id="content-guide" class="hidden flex-1 overflow-y-auto p-5 space-y-4 text-sm text-slate-600">
-                <h3 class="font-bold text-slate-950 text-base">Mẹo trình bày đạt điểm tối đa</h3>
-                <p>Giảng viên đại học luôn thích sự thực tế và tính khả thi trong kế hoạch. Dưới đây là cách bạn bảo vệ kế hoạch 5W1H2C5M này trước hội đồng:</p>
-                
-                <div class="space-y-3 mt-2">
-                    <div class="flex gap-2.5 items-start">
-                        <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold shrink-0">1</span>
-                        <p class="text-xs"><strong>Nhấn mạnh tính kết nối:</strong> Giải thích tại sao <strong>Money (Tài chính)</strong> ảnh hưởng đến việc mua <strong>Materials (Sách vở)</strong> hay đăng ký thi <strong>Check (Mock test)</strong>.</p>
+            <!-- AI Assistant Tab Content -->
+            <div id="content-ai" class="hidden flex-1 overflow-y-auto p-4 space-y-5">
+                <!-- AI Banner -->
+                <div class="bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-100 rounded-xl p-4 space-y-2.5 shadow-sm">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xl">✨</span>
+                        <h3 class="font-bold text-indigo-900 text-sm">Cá nhân hóa lộ trình IELTS</h3>
                     </div>
-                    <div class="flex gap-2.5 items-start">
-                        <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold shrink-0">2</span>
-                        <p class="text-xs"><strong>Quản trị rủi ro:</strong> Nêu bật nhánh <strong>Control (Kiểm soát)</strong>. Ví dụ: Nếu nản chí giữa chừng, bạn sẽ dựa vào <strong>Who (Bạn học cùng)</strong> để thúc đẩy động lực.</p>
-                    </div>
-                    <div class="flex gap-2.5 items-start">
-                        <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold shrink-0">3</span>
-                        <p class="text-xs"><strong>Thao tác bản đồ:</strong>
-                            <br>• Cuộn chuột để Phóng to / Thu nhỏ.
-                            <br>• Nhấn giữ chuột trái và kéo nền để Di chuyển sơ đồ.
-                            <br>• Nhấp đúp chuột vào bất kỳ ô nào để sửa trực tiếp văn bản.
-                        </p>
-                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">Cung cấp thông tin của bạn bên dưới để Gemini AI thiết kế lại toàn bộ mô tả của 13 nhánh theo đúng năng lực của bạn.</p>
                 </div>
 
-                <div class="pt-4 border-t border-slate-100">
-                    <h4 class="font-semibold text-slate-900 mb-1 text-xs">Phương pháp 5W1H2C5M là gì?</h4>
-                    <p class="text-xs text-slate-500 leading-relaxed">Là mô hình quản trị kế hoạch toàn diện kết hợp giữa Tư duy hướng mục tiêu (5W1H), Đo lường kiểm soát (2C), và Tối ưu hóa mọi nguồn lực hiện có (5M).</p>
+                <!-- AI Inputs form -->
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">Band hiện tại:</label>
+                        <select id="ai-current-band" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-xs bg-white focus:ring-2 focus:ring-indigo-500 outline-none transition-shadow">
+                            <option value="Mất gốc / Chưa biết gì">Mất gốc / Chưa thi bao giờ</option>
+                            <option value="4.0 - 4.5">Khá yếu (4.0 - 4.5)</option>
+                            <option value="5.0 - 5.5">Đã có nền tảng (5.0 - 5.5)</option>
+                            <option value="6.0 - 6.5">Cận mục tiêu (6.0 - 6.5)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">Kỹ năng yếu nhất:</label>
+                        <select id="ai-weak-skill" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-xs bg-white focus:ring-2 focus:ring-indigo-500 outline-none transition-shadow">
+                            <option value="Writing (Viết)">Writing (Kỹ năng Viết)</option>
+                            <option value="Speaking (Nói)">Speaking (Kỹ năng Nói)</option>
+                            <option value="Listening (Nghe)">Listening (Kỹ năng Nghe)</option>
+                            <option value="Reading (Đọc)">Reading (Kỹ năng Đọc)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wider">Thời gian học mỗi ngày:</label>
+                        <select id="ai-study-time" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-xs bg-white focus:ring-2 focus:ring-indigo-500 outline-none transition-shadow">
+                            <option value="30 phút - 1 tiếng">Dưới 1 tiếng (Bận rộn)</option>
+                            <option value="1 - 2 tiếng">1 - 2 tiếng (Trung bình)</option>
+                            <option value="Trên 2 tiếng">Trên 2 tiếng (Quyết tâm cao)</option>
+                        </select>
+                    </div>
+
+                    <!-- Optimize Button -->
+                    <button onclick="optimizeWithAI()" id="btn-optimize-ai" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg py-2.5 text-xs font-bold shadow-md flex items-center justify-center gap-1.5 transition-all transform active:scale-[0.98]">
+                        <span>✨ Tối ưu hoá kế hoạch bằng AI</span>
+                    </button>
+                </div>
+
+                <!-- Checklist Area generated by AI -->
+                <div id="ai-checklist-container" class="hidden border-t border-slate-100 pt-4 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wider">📋 Checklist khuyên dùng</h4>
+                        <span id="ai-checklist-target" class="text-[10px] bg-indigo-50 text-indigo-600 px-1.5 py-0.5 rounded font-bold">What</span>
+                    </div>
+                    <p class="text-[11px] text-slate-500">Các hành động thực tế cần làm ngay lập tức dựa trên phân tích của AI:</p>
+                    
+                    <div id="ai-checklist-items" class="space-y-2">
+                        <!-- Checklist items inserted dynamically -->
+                    </div>
                 </div>
             </div>
 
@@ -187,6 +224,31 @@
 
     <!-- JS Core Logic -->
     <script>
+        // Gemini API Configuration
+        const apiKey = ""; // The platform injects key automatically at runtime. Do not validate.
+
+        // Exponential Backoff helper function for API Calls
+        async function fetchWithRetry(url, options, maxRetries = 5) {
+            let delay = 1000;
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const response = await fetch(url, options);
+                    if (response.ok) {
+                        return await response.json();
+                    }
+                    if (response.status === 429 || (response.status >= 500 && response.status < 600)) {
+                        // Retry on rate limits or server instability
+                    } else {
+                        throw new Error(`Yêu cầu thất bại với trạng thái: ${response.status}`);
+                    }
+                } catch (err) {
+                    if (i === maxRetries - 1) throw err;
+                }
+                await new Promise(resolve => setTimeout(resolve, delay));
+                delay *= 2; // Exponential Backoff: 1s, 2s, 4s, 8s, 16s
+            }
+        }
+
         // Data Structure for 5W1H2C5M
         const initialNodes = {
             id: 'root',
@@ -400,8 +462,7 @@
                 const groups = nodesList.filter(n => n.isGroup);
                 const leaves = nodesList.filter(n => n.num); // 13 leaves
 
-                // We hide the grouping node connectors visually or tuck them inside the structure. 
-                // For a wheel look, we position the 13 leaves uniformly around the center.
+                // Position the 13 leaves uniformly around the center.
                 const radius = 330;
                 leaves.forEach((leaf, index) => {
                     // Position circularly
@@ -506,7 +567,6 @@
                 if (node.parentId) {
                     const parent = nodesList.find(n => n.id === node.parentId);
                     if (parent) {
-                        // Source coordinate (parent center or edge)
                         const fromX = parent.x;
                         const fromY = parent.y;
                         const toX = node.x;
@@ -516,11 +576,9 @@
                         ctx.strokeStyle = theme[node.category]?.stroke || theme.line;
                         
                         if (currentLayout === 'radial') {
-                            // Straight smooth lines radiating outward in wheel
                             ctx.moveTo(fromX, fromY);
                             ctx.lineTo(toX, toY);
                         } else {
-                            // Smooth Bezier curve for classic tree hierarchical aesthetics
                             const midX = (fromX + toX) / 2;
                             ctx.moveTo(fromX, fromY);
                             ctx.bezierCurveTo(midX, fromY, midX, toY, toX, toY);
@@ -533,11 +591,9 @@
             // Additionally link the Groups to central Root in Radial layout
             if (currentLayout === 'radial') {
                 const root = nodesList.find(n => n.isRoot);
-                const leaves = nodesList.filter(n => n.num);
                 ctx.lineWidth = 1;
                 ctx.strokeStyle = theme.line + '55'; // Transparent grey
 
-                // Draw an elegant outer circular track
                 ctx.beginPath();
                 ctx.arc(root.x, root.y, 330, 0, 2 * Math.PI);
                 ctx.stroke();
@@ -550,11 +606,8 @@
 
             nodesList.forEach(node => {
                 const isSelected = node.id === selectedNodeId;
-                
-                // Get style block based on node category
                 const style = node.isRoot ? theme.root : (theme[node.category] || theme.root);
                 
-                // Card dimensions
                 const w = node.width;
                 const h = node.height;
                 const x = node.x - w / 2;
@@ -582,7 +635,6 @@
 
                 // Card Text Content
                 if (node.isRoot) {
-                    // Central Node drawing
                     ctx.fillStyle = style.text;
                     ctx.font = 'bold 15px Inter';
                     ctx.textAlign = 'center';
@@ -593,15 +645,12 @@
                     ctx.fillText(node.desc, node.x, node.y + 15);
                 } 
                 else if (node.isGroup) {
-                    // Category group label drawing
                     ctx.fillStyle = style.stroke;
                     ctx.font = 'bold 12px Inter';
                     ctx.textAlign = 'center';
                     ctx.fillText(node.title, node.x, node.y + 4);
                 } 
                 else {
-                    // Leaf nodes (13 principles)
-                    // Draw a little index number badge
                     const badgeSize = 20;
                     const badgeX = x + 10;
                     const badgeY = y + 10;
@@ -616,14 +665,14 @@
                     ctx.fillText(node.num || '00', badgeX + badgeSize/2, badgeY + badgeSize/2 + 3);
 
                     // Draw Title Text
-                    ctx.fillStyle = '#0f172a'; // dark slate for readability
+                    ctx.fillStyle = '#0f172a';
                     if (currentTheme === 'neon') ctx.fillStyle = '#faf5ff';
                     ctx.font = 'bold 12px Inter';
                     ctx.textAlign = 'left';
                     ctx.fillText(node.title, x + 38, y + 24);
 
                     // Draw Description with text wrapping
-                    ctx.fillStyle = '#64748b'; // slate grey
+                    ctx.fillStyle = '#64748b';
                     if (currentTheme === 'neon') ctx.fillStyle = '#94a3b8';
                     ctx.font = '400 10px Inter';
                     wrapText(ctx, node.desc, x + 12, y + 44, w - 24, 14);
@@ -661,7 +710,7 @@
                     line = words[n] + ' ';
                     y += lineHeight;
                     linesDrawn++;
-                    if (linesDrawn >= 2) return; // limit to maximum 2 lines to prevent card overflowing
+                    if (linesDrawn >= 2) return;
                 } else {
                     line = testLine;
                 }
@@ -672,8 +721,6 @@
         // Interactive Events: Mouse, Zoom, Pan
         canvas.addEventListener('mousedown', (e) => {
             const mPos = getMousePosOnCanvas(e);
-            
-            // Check if user clicked a node
             const clickedNode = findNodeAtPosition(mPos.x, mPos.y);
 
             if (clickedNode) {
@@ -682,11 +729,9 @@
                 dragNodeOffsetX = mPos.x - clickedNode.x;
                 dragNodeOffsetY = mPos.y - clickedNode.y;
                 
-                // Show in sidebar editor
                 selectNodeInEditor(clickedNode);
                 render();
             } else {
-                // Drag canvas background (panning)
                 isDraggingCanvas = true;
                 dragStartX = e.clientX - panX;
                 dragStartY = e.clientY - panY;
@@ -695,13 +740,11 @@
 
         canvas.addEventListener('mousemove', (e) => {
             if (draggedNode) {
-                // Free drag and drop positioning
                 const mPos = getMousePosOnCanvas(e);
                 draggedNode.x = Math.round(mPos.x - dragNodeOffsetX);
                 draggedNode.y = Math.round(mPos.y - dragNodeOffsetY);
                 render();
             } else if (isDraggingCanvas) {
-                // Panning canvas
                 panX = e.clientX - dragStartX;
                 panY = e.clientY - dragStartY;
                 render();
@@ -718,13 +761,9 @@
             if (e.touches.length === 1) {
                 const touch = e.touches[0];
                 const rect = canvas.getBoundingClientRect();
-                const scaleX = canvas.width / (rect.width * window.devicePixelRatio || 1);
-                const scaleY = canvas.height / (rect.height * window.devicePixelRatio || 1);
-                
                 const clientX = touch.clientX - rect.left;
                 const clientY = touch.clientY - rect.top;
 
-                // Adjust for zoom scale and translate offset
                 const x = (clientX - (rect.width/2 + panX)) / scale;
                 const y = (clientY - (rect.height/2 + panY)) / scale;
 
@@ -784,12 +823,9 @@
         // Convert page coordinates to simulated canvas space coordinates
         function getMousePosOnCanvas(e) {
             const rect = canvas.getBoundingClientRect();
-            
-            // Mouse click relative to canvas viewport
             const clickX = e.clientX - rect.left;
             const clickY = e.clientY - rect.top;
 
-            // Subtract pan and scale factors to align with central origin coordinates
             const x = (clickX - (rect.width / 2 + panX)) / scale;
             const y = (clickY - (rect.height / 2 + panY)) / scale;
 
@@ -798,7 +834,6 @@
 
         // Detect if coordinate lands inside a card
         function findNodeAtPosition(x, y) {
-            // Traverse from top (reverse) so overlaying top elements clicked first
             for (let i = nodesList.length - 1; i >= 0; i--) {
                 const node = nodesList[i];
                 const halfW = node.width / 2;
@@ -815,7 +850,6 @@
         function setLayout(layoutType) {
             currentLayout = layoutType;
             
-            // Stylize tabs
             const btnRadial = document.getElementById('btn-layout-radial');
             const btnTree = document.getElementById('btn-layout-tree');
             
@@ -837,7 +871,6 @@
         function setTheme(themeName) {
             currentTheme = themeName;
             
-            // Toggle active classes on buttons
             const themeBtnIds = ['classic', 'pastel', 'neon', 'coral'];
             themeBtnIds.forEach(t => {
                 const btn = document.getElementById(`btn-theme-${t}`);
@@ -887,20 +920,27 @@
         // Switch Sidebar Panel
         function switchSidebarTab(tab) {
             const editorBtn = document.getElementById('tab-editor');
-            const guideBtn = document.getElementById('tab-guide');
+            const aiBtn = document.getElementById('tab-ai');
+            
             const editorContent = document.getElementById('content-editor');
-            const guideContent = document.getElementById('content-guide');
+            const aiContent = document.getElementById('content-ai');
+
+            // Default CSS classes
+            const inactiveClass = "flex-1 py-3 text-xs font-semibold text-center text-slate-500 hover:text-slate-800";
+            const activeClass = "flex-1 py-3 text-xs font-semibold text-center border-b-2 border-indigo-600 text-indigo-600";
+
+            editorBtn.className = inactiveClass;
+            aiBtn.className = inactiveClass;
+
+            editorContent.classList.add('hidden');
+            aiContent.classList.add('hidden');
 
             if (tab === 'editor') {
-                editorBtn.className = "flex-1 py-3 text-xs font-semibold text-center border-b-2 border-indigo-600 text-indigo-600";
-                guideBtn.className = "flex-1 py-3 text-xs font-semibold text-center text-slate-500 hover:text-slate-800";
+                editorBtn.className = activeClass;
                 editorContent.classList.remove('hidden');
-                guideContent.classList.add('hidden');
-            } else {
-                guideBtn.className = "flex-1 py-3 text-xs font-semibold text-center border-b-2 border-indigo-600 text-indigo-600";
-                editorBtn.className = "flex-1 py-3 text-xs font-semibold text-center text-slate-500 hover:text-slate-800";
-                guideContent.classList.remove('hidden');
-                editorContent.classList.add('hidden');
+            } else if (tab === 'ai') {
+                aiBtn.className = activeClass;
+                aiContent.classList.remove('hidden');
             }
         }
 
@@ -925,6 +965,12 @@
             if (selectedItem) {
                 selectedItem.classList.add('bg-indigo-50', 'border-indigo-200');
             }
+
+            // If selected node has a numerical value (is a leaf node), auto-open checklist options in AI Tab
+            if (node.num) {
+                document.getElementById('ai-checklist-target').innerText = node.title.split(' ')[0];
+                updateAIActionChecklistUI(node);
+            }
         }
 
         // Deselect currently highlighted node
@@ -948,7 +994,6 @@
                 node.title = document.getElementById('edit-node-title').value;
                 node.desc = document.getElementById('edit-node-desc').value;
                 
-                // Update text in lists
                 const listText = document.querySelector(`#list-item-${node.id} .node-title-txt`);
                 if (listText) listText.innerText = node.title;
 
@@ -962,20 +1007,18 @@
             container.innerHTML = '';
 
             nodesList.forEach(node => {
-                if (node.isGroup) return; // Skip categories for list simplicity
+                if (node.isGroup) return;
 
                 const item = document.createElement('div');
                 item.id = `list-item-${node.id}`;
                 item.className = "node-list-item border border-slate-100 p-2.5 rounded-lg text-left cursor-pointer transition-colors hover:bg-slate-50 flex gap-2 items-center";
                 
-                // Set click action
                 item.onclick = () => {
                     selectedNodeId = node.id;
                     selectNodeInEditor(node);
                     render();
                 };
 
-                // Left badge icon/number
                 const badge = document.createElement('span');
                 if (node.isRoot) {
                     badge.innerHTML = "🎯";
@@ -985,7 +1028,6 @@
                     badge.className = "text-[10px] font-bold px-1.5 py-0.5 rounded bg-slate-100 text-slate-600";
                 }
 
-                // Node summary details
                 const detailWrap = document.createElement('div');
                 detailWrap.className = "flex-1 min-w-0";
                 
@@ -1007,17 +1049,282 @@
             });
         }
 
+        // --- GEMINI AI POWERED FEATURES ---
+
+        // FEATURE 1: Optimize the entire plan based on user profile
+        async function optimizeWithAI() {
+            const btn = document.getElementById('btn-optimize-ai');
+            const origContent = btn.innerHTML;
+            
+            const currentBand = document.getElementById('ai-current-band').value;
+            const weakSkill = document.getElementById('ai-weak-skill').value;
+            const studyTime = document.getElementById('ai-study-time').value;
+
+            btn.disabled = true;
+            btn.innerHTML = `
+                <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span>✨ AI đang tối ưu hóa lộ trình...</span>
+            `;
+
+            showToast("✨ Đang kết nối tới bộ não Gemini AI...");
+
+            // Constructing System Prompt
+            const systemPrompt = `Bạn là một siêu chuyên gia cố vấn học thuật, huấn luyện viên luyện thi IELTS 8.5+.
+Nhiệm vụ của bạn là cá nhân hóa mô tả (description) cho 13 nhánh thuộc sơ đồ tư duy 5W1H2C5M để hỗ trợ người học đạt IELTS 7.0 trong năm thứ 2 Đại học.
+
+Dữ liệu hồ sơ người dùng hiện tại:
+- Band điểm IELTS hiện tại: ${currentBand}
+- Kỹ năng cần tập trung cải thiện nhất: ${weakSkill}
+- Thời gian tự học khả thi mỗi ngày: ${studyTime}
+
+Hãy điều chỉnh 13 nhánh (ID tương ứng từ node-01 đến node-13) sao cho cực kỳ thực tế, sắc sảo và mang tính hành động cao. Mô tả của mỗi nhánh phải ngắn gọn dưới 20 từ.
+Ví dụ nếu yếu Writing, hãy bổ sung tài liệu 'Linear Thinking' cho nhánh Materials hoặc 'Gõ task 2 hàng ngày' cho nhánh How.
+
+Mã ID tương ứng của các nút cần trả về:
+- node-01: What (Mục tiêu)
+- node-02: Why (Động lực)
+- node-03: When (Lộ trình)
+- node-04: Where (Địa điểm)
+- node-05: Who (Nhân sự)
+- node-06: How (Cách học)
+- node-07: Control (Giám sát)
+- node-08: Check (Đánh giá)
+- node-09: Man (Bản thân)
+- node-10: Money (Tài chính)
+- node-11: Materials (Tài liệu)
+- node-12: Machines (Thiết bị)
+- node-13: Method (Chiến thuật)
+
+Bạn BẮT BUỘC phải trả về cấu trúc định dạng JSON khớp hoàn hảo với JSON Schema được yêu cầu.`;
+
+            const userQuery = `Hãy tối ưu lộ trình cho hồ sơ: Band hiện tại: ${currentBand}, Kỹ năng yếu: ${weakSkill}, Thời gian tự học: ${studyTime}. Cung cấp mô tả mới cho các nút từ node-01 đến node-13 dưới dạng JSON.`;
+
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] },
+                generationConfig: {
+                    responseMimeType: "application/json",
+                    responseSchema: {
+                        type: "OBJECT",
+                        properties: {
+                            updates: {
+                                type: "ARRAY",
+                                description: "Danh sách mô tả mới được tối ưu hóa cho các nhánh từ node-01 đến node-13",
+                                items: {
+                                    type: "OBJECT",
+                                    properties: {
+                                        id: { type: "STRING", description: "ID của nút ví dụ: node-01" },
+                                        desc: { type: "STRING", description: "Mô tả mới súc tích, cụ thể, thực tiễn và dưới 20 từ bằng tiếng Việt" }
+                                    },
+                                    required: ["id", "desc"]
+                                }
+                            }
+                        },
+                        required: ["updates"]
+                    }
+                }
+            };
+
+            try {
+                const data = await fetchWithRetry(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+                if (!rawText) throw new Error("Phản hồi rỗng từ mô hình AI.");
+
+                const result = JSON.parse(rawText);
+
+                if (result && result.updates && Array.isArray(result.updates)) {
+                    result.updates.forEach(update => {
+                        const targetNode = nodesList.find(n => n.id === update.id);
+                        if (targetNode) {
+                            targetNode.desc = update.desc;
+                        }
+                    });
+
+                    buildSidebarList();
+                    render();
+                    showToast("✨ Đã tối ưu hóa lộ trình cá nhân hóa của bạn!");
+
+                    if (selectedNodeId) {
+                        const currentlySelected = nodesList.find(n => n.id === selectedNodeId);
+                        if (currentlySelected) selectNodeInEditor(currentlySelected);
+                    }
+                } else {
+                    throw new Error("Định dạng phản hồi không hợp lệ.");
+                }
+
+            } catch (err) {
+                console.error("Gemini Optimization Error: ", err);
+                showToast("⚠️ Không thể tối ưu bằng AI. Vui lòng kiểm tra lại kết nối mạng!");
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = origContent;
+            }
+        }
+
+        // FEATURE 2: Generate specific actionable checklist for a selected node
+        async function generateNodeChecklist() {
+            if (!selectedNodeId) {
+                showToast("Vui lòng chọn một nhánh trên sơ đồ trước!");
+                return;
+            }
+
+            const selectedNode = nodesList.find(n => n.id === selectedNodeId);
+            if (!selectedNode || !selectedNode.num) {
+                showToast("Nhánh chủ đề không có danh sách việc cần làm cụ thể. Vui lòng chọn 1 trong 13 nhánh!");
+                return;
+            }
+
+            switchSidebarTab('ai');
+
+            const currentBand = document.getElementById('ai-current-band').value;
+            const weakSkill = document.getElementById('ai-weak-skill').value;
+            const studyTime = document.getElementById('ai-study-time').value;
+
+            const container = document.getElementById('ai-checklist-container');
+            const targetLabel = document.getElementById('ai-checklist-target');
+            const itemsDiv = document.getElementById('ai-checklist-items');
+
+            targetLabel.innerText = selectedNode.title;
+            container.classList.remove('hidden');
+            
+            itemsDiv.innerHTML = `
+                <div class="flex items-center justify-center py-6 gap-2 text-indigo-600">
+                    <svg class="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <span class="text-xs font-semibold">Gemini đang lập danh sách việc cần làm...</span>
+                </div>
+            `;
+
+            const systemPrompt = `Bạn là một cố vấn IELTS chuyên nghiệp.
+Nhiệm vụ của bạn là đưa ra một danh sách 3 đến 4 đầu việc cụ thể, thực tế và hành động được ngay (Checklist hành động) cho nhánh: "${selectedNode.title}" (Mô tả hiện tại: "${selectedNode.desc}").
+
+Hãy cá nhân hóa sâu sắc danh sách này dựa trên thông tin người học:
+- Trình độ hiện tại: ${currentBand}
+- Kỹ năng yếu nhất: ${weakSkill}
+- Thời gian rảnh tự học: ${studyTime}/ngày.
+
+Ví dụ nếu người dùng chọn nhánh "Materials (Tài liệu)", hãy đưa ra tên chính xác cuốn sách hoặc nguồn tài liệu phù hợp trực tiếp với trình độ của họ.
+Bạn phải trả về định dạng đúng theo JSON Schema cấu trúc mảng chuỗi được yêu cầu.`;
+
+            const query = `Tạo danh sách checklist hành động cho nhánh "${selectedNode.title}" với mô tả hiện tại "${selectedNode.desc}".`;
+
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ parts: [{ text: query }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] },
+                generationConfig: {
+                    responseMimeType: "application/json",
+                    responseSchema: {
+                        type: "OBJECT",
+                        properties: {
+                            checklist: {
+                                type: "ARRAY",
+                                description: "Danh sách 3-4 việc cần làm cụ thể, thực tiễn và hành động ngay được",
+                                items: { type: "STRING" }
+                            }
+                        },
+                        required: ["checklist"]
+                    }
+                }
+            };
+
+            try {
+                const data = await fetchWithRetry(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+                if (!rawText) throw new Error("Empty response from AI.");
+
+                const result = JSON.parse(rawText);
+
+                if (result && result.checklist && Array.isArray(result.checklist)) {
+                    selectedNode.checklistState = result.checklist.map(task => ({ text: task, checked: false }));
+                    updateAIActionChecklistUI(selectedNode);
+                } else {
+                    throw new Error("Invalid format received.");
+                }
+
+            } catch (err) {
+                console.error("Checklist Generation Error: ", err);
+                itemsDiv.innerHTML = `
+                    <div class="text-center py-4 text-xs text-red-500 font-medium">
+                        ⚠️ Không thể lấy checklist bằng AI. Vui lòng kiểm tra lại kết nối!
+                    </div>
+                `;
+            }
+        }
+
+        // Render checklist elements inside Sidebar AI Tab
+        function updateAIActionChecklistUI(node) {
+            const container = document.getElementById('ai-checklist-container');
+            const targetLabel = document.getElementById('ai-checklist-target');
+            const itemsDiv = document.getElementById('ai-checklist-items');
+
+            if (!node.checklistState) {
+                container.classList.add('hidden');
+                return;
+            }
+
+            targetLabel.innerText = node.title.split(' ')[0];
+            container.classList.remove('hidden');
+            itemsDiv.innerHTML = '';
+
+            node.checklistState.forEach((item, index) => {
+                const label = document.createElement('label');
+                label.className = "flex items-start gap-2.5 p-2 bg-slate-50 hover:bg-indigo-50/40 rounded-lg cursor-pointer transition-colors border border-slate-100";
+                
+                const checkbox = document.createElement('input');
+                checkbox.type = "checkbox";
+                checkbox.checked = item.checked;
+                checkbox.className = "mt-0.5 rounded text-indigo-600 focus:ring-indigo-500 border-slate-300";
+                
+                checkbox.addEventListener('change', () => {
+                    item.checked = checkbox.checked;
+                    if (checkbox.checked) {
+                        label.classList.add('opacity-60', 'line-through');
+                        showToast("✨ Đã hoàn thành một việc cần làm!");
+                    } else {
+                        label.classList.remove('opacity-60', 'line-through');
+                    }
+                });
+
+                if (item.checked) {
+                    label.classList.add('opacity-60', 'line-through');
+                }
+
+                const span = document.createElement('span');
+                span.className = "text-xs text-slate-700 leading-relaxed";
+                span.innerText = item.text;
+
+                label.appendChild(checkbox);
+                label.appendChild(span);
+                itemsDiv.appendChild(label);
+            });
+        }
+
         // Advanced PNG High Resolution Export logic using HTML5 Canvas
         function exportPNG() {
             showToast("Đang kết xuất ảnh chất lượng cao...");
 
-            // Temporarily reset view zoom and translate settings to capture the whole graph fully centered
             const prevScale = scale;
             const prevPanX = panX;
             const prevPanY = panY;
             const prevSelectedId = selectedNodeId;
 
-            // Compute actual bounding box of all nodes
             let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
             nodesList.forEach(n => {
                 const hw = n.width / 2;
@@ -1028,29 +1335,24 @@
                 if (n.y + hh > maxY) maxY = n.y + hh;
             });
 
-            // Add margin padding to export
             const padding = 60;
             const expWidth = (maxX - minX) + padding * 2;
             const expHeight = (maxY - minY) + padding * 2;
 
-            // Create temporary high-res export canvas
             const expCanvas = document.createElement('canvas');
-            expCanvas.width = expWidth * 2; // scale by 2 for Ultra HD resolution
+            expCanvas.width = expWidth * 2;
             expCanvas.height = expHeight * 2;
             const expCtx = expCanvas.getContext('2d');
             expCtx.scale(2, 2);
 
-            // Fill background
             expCtx.fillStyle = themes[currentTheme].bg;
             expCtx.fillRect(0, 0, expWidth, expHeight);
 
-            // Set coordinates translation so mindmap coordinates are correctly centered in the bounding box
             expCtx.save();
             const centerX = expWidth / 2 - (minX + maxX) / 2;
             const centerY = expHeight / 2 - (minY + maxY) / 2;
             expCtx.translate(centerX, centerY);
 
-            // Draw connection lines on export canvas
             expCtx.lineWidth = 2.5;
             expCtx.strokeStyle = themes[currentTheme].line;
             nodesList.forEach(node => {
@@ -1072,7 +1374,6 @@
                 }
             });
 
-            // Radial outer loop helper for export
             if (currentLayout === 'radial') {
                 const root = nodesList.find(n => n.isRoot);
                 expCtx.lineWidth = 1;
@@ -1082,7 +1383,6 @@
                 expCtx.stroke();
             }
 
-            // Draw nodes on export canvas
             nodesList.forEach(node => {
                 const style = node.isRoot ? themes[currentTheme].root : (themes[currentTheme][node.category] || themes[currentTheme].root);
                 const w = node.width;
@@ -1090,7 +1390,6 @@
                 const x = node.x - w / 2;
                 const y = node.y - h / 2;
 
-                // Simple node shadow
                 expCtx.shadowColor = 'rgba(0, 0, 0, 0.05)';
                 expCtx.shadowBlur = 4;
                 expCtx.shadowOffsetY = 2;
@@ -1106,7 +1405,6 @@
                 expCtx.shadowBlur = 0;
                 expCtx.shadowOffsetY = 0;
 
-                // Text drawing
                 if (node.isRoot) {
                     expCtx.fillStyle = style.text;
                     expCtx.font = 'bold 15px Inter';
@@ -1148,7 +1446,6 @@
 
             expCtx.restore();
 
-            // Export to PNG Download Link trigger
             try {
                 const imgURL = expCanvas.toDataURL('image/png');
                 const downloadLink = document.createElement('a');
@@ -1159,7 +1456,6 @@
                 document.body.removeChild(downloadLink);
                 showToast("Đã tải ảnh về thành công!");
             } catch (err) {
-                // Clipboard fallback support
                 document.execCommand('copy');
                 showToast("Không thể tải trực tiếp, đã lưu dữ liệu clipboard.");
             }

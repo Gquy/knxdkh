@@ -199,6 +199,18 @@
 
         <!-- Canvas Container -->
         <div class="flex-1 h-full bg-slate-50 relative overflow-hidden" id="canvas-wrapper">
+            <!-- Floating Student Info Card (High-fidelity glassmorphism) -->
+            <div class="absolute top-5 left-5 bg-white/85 backdrop-blur-md border border-slate-200 rounded-xl p-3 shadow-lg z-10 flex items-center gap-3 pointer-events-auto select-none transition-all duration-300 hover:shadow-xl hover:scale-[1.02]">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-600 text-white flex items-center justify-center font-bold text-sm shadow-md shadow-indigo-100">
+                    GH
+                </div>
+                <div>
+                    <span class="text-[9px] font-bold text-indigo-600 tracking-wider uppercase block leading-none mb-0.5">Sinh viên thực hiện</span>
+                    <h4 class="text-xs font-bold text-slate-800 leading-none">NGUYỄN VĂN GIA HUY</h4>
+                    <p class="text-[10px] text-slate-500 font-semibold mt-1 leading-none">MSSV: 25162044</p>
+                </div>
+            </div>
+
             <!-- Floating Navigation Helpers -->
             <div class="absolute bottom-5 right-5 flex flex-col gap-2 z-10">
                 <button onclick="zoomIn()" class="w-10 h-10 bg-white hover:bg-slate-50 active:bg-slate-100 text-slate-700 rounded-lg shadow-md border border-slate-200 flex items-center justify-center transition-transform hover:scale-105" title="Phóng to">
@@ -1317,6 +1329,7 @@ Bạn phải trả về định dạng đúng theo JSON Schema cấu trúc mản
         }
 
         // Advanced PNG High Resolution Export logic using HTML5 Canvas
+        // Burn Student Identification card statically inside the final image output corner
         function exportPNG() {
             showToast("Đang kết xuất ảnh chất lượng cao...");
 
@@ -1444,6 +1457,35 @@ Bạn phải trả về định dạng đúng theo JSON Schema cấu trúc mản
                 }
             });
 
+            expCtx.restore();
+
+            // Render permanent Watermark overlay of Nguyen Van Gia Huy on the top-left corner of export canvas
+            expCtx.save();
+            const badgeW = 200;
+            const badgeH = 55;
+            const bx = 20;
+            const by = 20;
+
+            // Translucent rounded card background
+            expCtx.fillStyle = currentTheme === 'neon' ? 'rgba(30, 41, 59, 0.9)' : 'rgba(255, 255, 255, 0.9)';
+            expCtx.strokeStyle = themes[currentTheme].line;
+            expCtx.lineWidth = 1.5;
+            drawRoundedRect(expCtx, bx, by, badgeW, badgeH, 10);
+            expCtx.fill();
+            expCtx.stroke();
+
+            // Inner Text Info
+            expCtx.fillStyle = '#6366f1'; // Indigo 500
+            expCtx.font = 'bold 8.5px Inter';
+            expCtx.fillText("SINH VIÊN THỰC HIỆN", bx + 12, by + 18);
+
+            expCtx.fillStyle = currentTheme === 'neon' ? '#f8fafc' : '#1e293b';
+            expCtx.font = 'bold 11px Inter';
+            expCtx.fillText("NGUYỄN VĂN GIA HUY", bx + 12, by + 32);
+
+            expCtx.fillStyle = currentTheme === 'neon' ? '#94a3b8' : '#64748b';
+            expCtx.font = '600 9.5px Inter';
+            expCtx.fillText("MSSV: 25162044", bx + 12, by + 45);
             expCtx.restore();
 
             try {
